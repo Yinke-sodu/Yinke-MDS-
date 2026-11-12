@@ -1,0 +1,9 @@
+.env
+.env.*
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+pnpm-debug.log*
+.vercel/
+.DS_Store

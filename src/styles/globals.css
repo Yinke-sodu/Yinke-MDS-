@@ -1,0 +1,43 @@
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-soft);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* 侧边栏粘性定位，高度与顶栏高度均来自布局 token */
+  .sidebar-shell {
+    position: sticky;
+    top: var(--layout-header-height);
+    height: calc(100vh - var(--layout-header-height));
+  }
+
+  /* 移动端横向导航隐藏滚动条 */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
