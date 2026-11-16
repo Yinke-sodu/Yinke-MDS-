@@ -63,6 +63,7 @@ const config: Config = {
         mono: 'var(--font-mono)',
       },
       fontSize: {
+        '10': ['var(--font-size-10)', { lineHeight: 'var(--line-height-10)' }],
         '12': ['var(--font-size-12)', { lineHeight: 'var(--line-height-12)' }],
         '14': ['var(--font-size-14)', { lineHeight: 'var(--line-height-14)' }],
         '15': ['var(--font-size-15)', { lineHeight: 'var(--line-height-15)' }],

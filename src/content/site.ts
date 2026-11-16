@@ -6,6 +6,7 @@
 export interface NavItem {
   label: string;
   href: string;
+  enLabel?: string;
 }
 
 export interface NavGroup {
@@ -88,11 +89,26 @@ export const siteContent: SiteContent = {
     {
       title: '全局样式',
       items: [
-        { label: '色彩', href: '#palette' },
-        { label: '字体', href: '#typography' },
-        { label: '间距', href: '#spacing' },
-        { label: '圆角与阴影', href: '#shape' },
+        { label: '色彩', href: '/palette', enLabel: 'Color' },
+        { label: '布局', href: '#' },
+        { label: '字体', href: '/typography', enLabel: 'Typography' },
+        { label: '图标', href: '#' },
+        { label: '间距', href: '/spacing', enLabel: 'Spacing' },
+        { label: '圆角与阴影', href: '/shape' },
       ],
+    },
+    {
+      title: '组件',
+      items: [
+        { label: '置底按钮', href: '#' },
+        { label: '底部浮窗', href: '#' },
+        { label: '弹窗', href: '/modal', enLabel: 'Modal' },
+        { label: '导航栏', href: '#' },
+      ],
+    },
+    {
+      title: '模版',
+      items: [],
     },
   ],
   hero: {
@@ -129,9 +145,9 @@ export const siteContent: SiteContent = {
     },
     typography: {
       eyebrow: '02 / Typography',
-      title: '字体',
+      title: '字体规范表',
       description:
-        '以 MiSans 为主要字体，字号从 12 到 52 共 10 级，配合固定行高与字重，保证信息层级稳定。',
+        '原字体 PingFang SC，10 个文字样式按标题、正文、辅助文字 3 个分组组织。全部字距 0%，无文本装饰。',
     },
     spacing: {
       eyebrow: '03 / Spacing',

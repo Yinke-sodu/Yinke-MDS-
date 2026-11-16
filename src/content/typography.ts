@@ -1,130 +1,213 @@
 /**
- * 字体 token 配置：字体家族、字重与字号阶梯。
+ * Typography token 配置。
+ * 数据来源：GEAK NAS DS_Mobile Figma 文件 → 字体规范表 · Typography 节点 (833:2244)。
+ * 原字体家族 PingFang SC，共 10 个文字样式 / 3 个分组，全部字距 0%、无文本装饰。
  */
 
 export interface FontFamilyToken {
+  /** 样式显示名 */
   name: string;
+  /** CSS 变量 token */
   token: string;
+  /** 预览样本文字 */
   sample: string;
+  /** 用途说明 */
   description: string;
 }
 
 export interface FontWeightToken {
+  /** 字重英文名 */
   name: string;
-  token: string;
+  /** 对应 CSS font-weight 值 */
   value: string;
-}
-
-export interface TypeScaleToken {
-  name: string;
+  /** CSS 变量 token */
   token: string;
-  lineHeightToken: string;
-  size: string;
-  lineHeight: string;
-  sample: string;
 }
 
+export interface TypeStyle {
+  /** Figma 中的样式名，如 Headline/Headline0 */
+  name: string;
+  /** 展示用的预览文案 */
+  sample: string;
+  /** 原字体名 (PingFang SC) */
+  fontFamily: string;
+  /** 原字重英文名 */
+  fontWeight: 'Regular' | 'Medium' | 'Semibold';
+  /** 字号，单位 px */
+  fontSize: number;
+  /** 行高，单位 px */
+  lineHeight: number;
+  /** 字距百分比，Figma 规范全部 0% */
+  letterSpacing: string;
+}
+
+export interface TypeGroup {
+  /** 分组编号，如 01 */
+  index: string;
+  /** 分组中文名，如 标题 */
+  label: string;
+  /** 分组英文名，如 Headline */
+  englishLabel: string;
+  /** 该分组下的所有样式 */
+  styles: TypeStyle[];
+}
+
+/** 字体概览指标 — 从 Figma 设计稿的概览卡片提取 */
+export const typographyOverview = {
+  /** 原字体家族 */
+  fontFamily: 'PingFang SC · 苹方',
+  /** 样式总数 / 分组数 */
+  styleCount: '10 个样式 / 3 个分组',
+  /** 原字重范围 */
+  weightRange: 'Regular · Medium · Semibold',
+  /** 替代字体预览说明 */
+  previewNote:
+    '预览保留原字号和行高，但不代表苹方的实际字形与字宽；Caption2 为原有 10px 样式，请留意小字号可读性。',
+  /** 参数来源说明 */
+  sourceNote:
+    '参数来源：GEAK NAS DS_Mobile Figma 文件，字体规范表 · Typography 节点。全部字距 0%、段后距 0 px，无文本装饰。',
+};
+
+/** 字体家族列表 — 展示项目中使用的字体栈 */
 export const fontFamilyTokens: FontFamilyToken[] = [
   {
-    name: 'MiSans',
+    name: 'PingFang SC',
     token: '--font-sans',
-    sample: 'Aa 移动端设计规范 123',
-    description: '界面默认字体，覆盖中英文与数字。',
+    sample: '让信息清晰有序 Aa 0123',
+    description: '界面主字体，覆盖 iOS 系统原生中文字形。',
+  },
+  {
+    name: 'Noto Sans SC',
+    token: '--font-sans-fallback',
+    sample: '好的排版，让阅读自然发生。Aa 0123',
+    description: '跨平台替代字体，用于非 Apple 设备与开发预览。',
   },
   {
     name: 'Mono',
     token: '--font-mono',
-    sample: 'const token = 28px;',
+    sample: 'const token = 24px;',
     description: '用于 token 名称与代码片段。',
   },
 ];
 
+/** 字重列表 — PingFang SC 提供 3 档，Semibold 设计稿中用 Bold 近似 */
 export const weightTokens: FontWeightToken[] = [
-  { name: 'Regular', token: '--font-weight-normal', value: '400' },
-  { name: 'Medium', token: '--font-weight-medium', value: '500' },
-  { name: 'Semibold', token: '--font-weight-semibold', value: '600' },
-  { name: 'Bold', token: '--font-weight-bold', value: '700' },
+  { name: 'Regular', value: '400', token: '--font-weight-normal' },
+  { name: 'Medium', value: '500', token: '--font-weight-medium' },
+  { name: 'Semibold', value: '600', token: '--font-weight-semibold' },
 ];
 
-export const typeScale: TypeScaleToken[] = [
+/** 完整的 3 分组 10 样式 — 按 Figma 设计稿原样导出 */
+export const typeGroups: TypeGroup[] = [
   {
-    name: 'Display',
-    token: '--font-size-52',
-    lineHeightToken: '--line-height-52',
-    size: '52px',
-    lineHeight: '58px',
-    sample: '移动端设计规范',
+    index: '01',
+    label: '标题',
+    englishLabel: 'Headline',
+    styles: [
+      {
+        name: 'Headline/Headline0',
+        sample: '让信息清晰有序 Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Semibold',
+        fontSize: 32,
+        lineHeight: 40,
+        letterSpacing: '0%',
+      },
+      {
+        name: 'Headline/Headline1',
+        sample: '让信息清晰有序 Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Semibold',
+        fontSize: 24,
+        lineHeight: 32,
+        letterSpacing: '0%',
+      },
+      {
+        name: 'Headline/Headline2',
+        sample: '让信息清晰有序 Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Semibold',
+        fontSize: 18,
+        lineHeight: 24,
+        letterSpacing: '0%',
+      },
+      {
+        name: 'Headline/Title1',
+        sample: '让信息清晰有序 Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Medium',
+        fontSize: 16,
+        lineHeight: 22,
+        letterSpacing: '0%',
+      },
+      {
+        name: 'Headline/Title2',
+        sample: '让信息清晰有序 Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Medium',
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: '0%',
+      },
+    ],
   },
   {
-    name: 'Title',
-    token: '--font-size-40',
-    lineHeightToken: '--line-height-40',
-    size: '40px',
-    lineHeight: '48px',
-    sample: '一致性来自约束',
+    index: '02',
+    label: '正文',
+    englishLabel: 'Body',
+    styles: [
+      {
+        name: 'Body/Body1',
+        sample: '好的排版，让阅读自然发生。Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Regular',
+        fontSize: 16,
+        lineHeight: 22,
+        letterSpacing: '0%',
+      },
+      {
+        name: 'Body/Body2',
+        sample: '好的排版，让阅读自然发生。Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Regular',
+        fontSize: 16,
+        lineHeight: 24,
+        letterSpacing: '0%',
+      },
+      {
+        name: 'Body/Body3',
+        sample: '好的排版，让阅读自然发生。Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Regular',
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: '0%',
+      },
+    ],
   },
   {
-    name: 'Heading 1',
-    token: '--font-size-32',
-    lineHeightToken: '--line-height-32',
-    size: '32px',
-    lineHeight: '40px',
-    sample: '让界面拥有节奏',
-  },
-  {
-    name: 'Heading 2',
-    token: '--font-size-28',
-    lineHeightToken: '--line-height-28',
-    size: '28px',
-    lineHeight: '35px',
-    sample: '信息层级清晰',
-  },
-  {
-    name: 'Heading 3',
-    token: '--font-size-24',
-    lineHeightToken: '--line-height-24',
-    size: '24px',
-    lineHeight: '32px',
-    sample: '组件与 token 对齐',
-  },
-  {
-    name: 'Lead',
-    token: '--font-size-20',
-    lineHeightToken: '--line-height-20',
-    size: '20px',
-    lineHeight: '28px',
-    sample: '从设计稿到代码',
-  },
-  {
-    name: 'Body Large',
-    token: '--font-size-18',
-    lineHeightToken: '--line-height-18',
-    size: '18px',
-    lineHeight: '26px',
-    sample: '所有数值只保留一个来源',
-  },
-  {
-    name: 'Body',
-    token: '--font-size-15',
-    lineHeightToken: '--line-height-15',
-    size: '15px',
-    lineHeight: '24px',
-    sample: '正文使用基准字号，适合长文本阅读。',
-  },
-  {
-    name: 'Caption',
-    token: '--font-size-14',
-    lineHeightToken: '--line-height-14',
-    size: '14px',
-    lineHeight: '20px',
-    sample: '辅助说明与表单提示文字。',
-  },
-  {
-    name: 'Footnote',
-    token: '--font-size-12',
-    lineHeightToken: '--line-height-12',
-    size: '12px',
-    lineHeight: '16px',
-    sample: '标签与极小号注释。',
+    index: '03',
+    label: '辅助文字',
+    englishLabel: 'Caption',
+    styles: [
+      {
+        name: 'Caption/Caption1',
+        sample: '辅助信息与说明文字 Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Regular',
+        fontSize: 12,
+        lineHeight: 16,
+        letterSpacing: '0%',
+      },
+      {
+        name: 'Caption/Caption2',
+        sample: '辅助信息与说明文字 Aa 0123',
+        fontFamily: 'PingFang SC',
+        fontWeight: 'Regular',
+        fontSize: 10,
+        lineHeight: 14,
+        letterSpacing: '0%',
+      },
+    ],
   },
 ];

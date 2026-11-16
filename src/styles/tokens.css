@@ -8,43 +8,57 @@
   color-scheme: light;
 
   /* ---------- 字体 ---------- */
-  --font-sans: "MiSans", "PingFang SC", "Noto Sans SC", "Microsoft YaHei",
+  --font-sans: "PingFang SC", "Noto Sans SC", "MiSans", "Microsoft YaHei",
     -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
     monospace;
 
+  /* Figma 设计规范：10 个文字样式的字号与对应行高 */
+  --font-size-10: 0.625rem;
   --font-size-12: 0.75rem;
   --font-size-14: 0.875rem;
-  --font-size-15: 0.9375rem;
+  --font-size-15: 0.9375rem; /* 兼容旧 token，非 Figma 规范 */
   --font-size-16: 1rem;
   --font-size-18: 1.125rem;
-  --font-size-20: 1.25rem;
+  --font-size-20: 1.25rem; /* 兼容旧 token，非 Figma 规范 */
   --font-size-24: 1.5rem;
-  --font-size-28: 1.75rem;
+  --font-size-28: 1.75rem; /* 兼容旧 token，非 Figma 规范 */
   --font-size-32: 2rem;
-  --font-size-40: 2.5rem;
-  --font-size-52: 3.25rem;
+  --font-size-40: 2.5rem; /* 兼容旧 token，非 Figma 规范 */
+  --font-size-52: 3.25rem; /* 兼容旧 token，非 Figma 规范 */
 
-  --line-height-12: 1rem;
-  --line-height-14: 1.25rem;
-  --line-height-15: 1.5rem;
-  --line-height-16: 1.375rem;
-  --line-height-18: 1.625rem;
-  --line-height-20: 1.75rem;
-  --line-height-24: 2rem;
-  --line-height-28: 2.1875rem;
-  --line-height-32: 2.5rem;
-  --line-height-40: 3rem;
-  --line-height-52: 3.625rem;
+  /* Figma 规范中的精确行高（按样式定义，不同样式同字号可有不同行高） */
+  --line-height-10: 0.875rem;   /* Caption2: 14px */
+  --line-height-12: 1rem;       /* Caption1: 16px */
+  --line-height-14: 1.25rem;    /* Title2 / Body3: 20px */
+  --line-height-15: 1.5rem;     /* 兼容旧 token */
+  --line-height-16-short: 1.375rem; /* Title1 / Body1: 22px */
+  --line-height-16: 1.5rem;    /* Body2: 24px，Header 默认 */
+  --line-height-18: 1.5rem;    /* Headline2: 24px */
+  --line-height-20: 1.75rem;   /* 兼容旧 token */
+  --line-height-24: 2rem;      /* Headline1: 32px */
+  --line-height-28: 2.1875rem; /* 兼容旧 token */
+  --line-height-32: 2.5rem;    /* Headline0: 40px */
+  --line-height-40: 3rem;      /* 兼容旧 token */
+  --line-height-52: 3.625rem;  /* 兼容旧 token */
 
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
+  /* Figma 字重：PingFang SC 提供 Regular / Medium / Semibold，Bold 用于替代 */
+  --font-weight-normal: 400;    /* Regular */
+  --font-weight-medium: 500;    /* Medium */
+  --font-weight-semibold: 600;  /* Semibold */
+  --font-weight-bold: 700;      /* Bold，Figma 中用于 Semibold 替代 */
 
   --letter-spacing-tight: -0.01em;
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.08em;
+
+  /* ---------- 颜色：Figma Typography 页面专用 ---------- */
+  --color-typo-accent: #2e6ef0;       /* 页眉 eyebrow、分组标题蓝 */
+  --color-typo-text: #171c26;         /* 深色文字 */
+  --color-typo-text-muted: #5c6370;   /* 灰色说明文字 */
+  --color-typo-surface: #f5f7fb;      /* 概览卡片 / 表头背景 */
+  --color-typo-divider: #dee3eb;      /* 行间分隔线 */
+  --color-typo-radius: 13px;          /* 概览卡片圆角 */
 
   /* ---------- 颜色：品牌色 ---------- */
   --color-primary: #3379ff;
@@ -143,4 +157,11 @@
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --easing-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---------- 间距规范专用 ---------- */
+  --color-spacing-accent: #3379ff;
+  --color-spacing-text: #181819;
+  --color-spacing-text-muted: #5d5c61;
+  --color-spacing-surface: #f4f4f7;
+  --color-spacing-divider: #f4f4f7;
 }

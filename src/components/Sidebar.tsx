@@ -1,11 +1,14 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { siteContent } from '@/content/site';
 
-/** 侧边导航，按全局样式与组件分组，可折叠 */
+/** 侧边导航，严格按 Figma 806:2004 实现：260px 宽、40px 项高、选中态显示英文 sub-label */
 export function Sidebar() {
+  const pathname = usePathname();
   const [collapsedGroups, setCollapsedGroups] = useState<string[]>([]);
+  const [hoverKey, setHoverKey] = useState<string | null>(null);
 
   const toggleGroup = (title: string) => {
     setCollapsedGroups((current) =>
@@ -16,40 +19,106 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="sidebar-shell hidden w-sidebar shrink-0 overflow-y-auto border-r border-border-subtle bg-surface lg:block">
-      <nav className="flex flex-col gap-1 p-3" aria-label="设计规范导航">
-        {siteContent.navGroups.map((group) => {
-          const isOpen = !collapsedGroups.includes(group.title);
+    <aside
+      style={{
+        width: '260px',
+        flexShrink: 0,
+        backgroundColor: '#FFFFFF',
+        borderRight: '1px solid #E5E5E5',
+        padding: '68px 12px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '32px',
+        overflowY: 'auto',
+      }}
+    >
+      {siteContent.navGroups.map((group) => {
+        const isOpen = !collapsedGroups.includes(group.title);
 
-          return (
-            <div key={group.title} className="flex flex-col">
-              <button
-                type="button"
-                onClick={() => toggleGroup(group.title)}
-                aria-expanded={isOpen}
-                className="flex h-10 items-center justify-between gap-2 rounded-sm px-3 text-14 text-fg transition-colors duration-fast hover:bg-surface-muted"
-              >
-                <span>{group.title}</span>
-                <Chevron open={isOpen} />
-              </button>
+        return (
+          <div key={group.title} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {/* 分组标题 */}
+            <button
+              type="button"
+              onClick={() => toggleGroup(group.title)}
+              aria-expanded={isOpen}
+              style={{
+                width: '100%',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingLeft: '12px',
+                paddingRight: '9px',
+                gap: '10px',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 400,
+                color: '#181819',
+              }}
+            >
+              <span>{group.title}</span>
+              <Chevron open={isOpen} />
+            </button>
 
-              {isOpen ? (
-                <div className="flex flex-col">
-                  {group.items.map((item) => (
+            {/* 分组内导航项 */}
+            {isOpen && group.items.length > 0 && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+                {group.items.map((item) => {
+                  const isActive = pathname === item.href;
+                  const isHover = hoverKey === item.href;
+                  const showEn = isActive || isHover;
+
+                  return (
                     <a
                       key={item.href}
                       href={item.href}
-                      className="flex h-10 items-center rounded-sm pl-8 pr-3 text-14 text-fg transition-colors duration-fast hover:bg-surface-muted"
+                      aria-current={isActive ? 'page' : undefined}
+                      onMouseEnter={() => setHoverKey(item.href)}
+                      onMouseLeave={() => setHoverKey(null)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        height: '40px',
+                        paddingLeft: '32px',
+                        paddingRight: '9px',
+                        gap: '10px',
+                        textDecoration: 'none',
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        backgroundColor: isActive ? '#F4F4F7' : 'transparent',
+                        borderRadius: isActive ? '8px' : '0',
+                        color: '#181819',
+                        transition: 'background-color 150ms, border-radius 150ms',
+                      }}
+                      onMouseOver={(e) => {
+                        if (!isActive) {
+                          (e.currentTarget as HTMLElement).style.backgroundColor = '#F9F9FB';
+                          (e.currentTarget as HTMLElement).style.borderRadius = '8px';
+                        }
+                      }}
+                      onMouseOut={(e) => {
+                        if (!isActive) {
+                          (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
+                          (e.currentTarget as HTMLElement).style.borderRadius = '0';
+                        }
+                      }}
                     >
-                      {item.label}
+                      {item.enLabel ? (
+                        showEn ? `${item.label} ${item.enLabel}` : item.label
+                      ) : (
+                        item.label
+                      )}
                     </a>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          );
-        })}
-      </nav>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </aside>
   );
 }
@@ -67,7 +136,11 @@ function Chevron({ open }: ChevronProps) {
       viewBox="0 0 15 15"
       fill="none"
       aria-hidden
-      className={`shrink-0 text-fg transition-transform duration-fast ${open ? 'rotate-180' : ''}`}
+      style={{
+        transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+        transition: 'transform 150ms',
+        flexShrink: 0,
+      }}
     >
       <path
         d="M3.75 5.5 7.5 9.25 11.25 5.5"
