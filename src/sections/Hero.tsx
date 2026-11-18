@@ -63,72 +63,7 @@ export function Hero() {
           </Card>
         </div>
 
-        <div className="mt-10 rounded-md border border-border bg-surface-muted p-6">
-          <div className="flex items-center justify-between gap-3">
-            <span className="font-mono text-12 text-fg-muted">
-              {preview.label}
-            </span>
-            <Badge tone="success">{preview.status}</Badge>
-          </div>
 
-          <div className="mt-4 grid gap-6 md:grid-cols-3">
-            <div>
-              <p className="font-mono text-12 text-fg-subtle">
-                {preview.colorLabel}
-              </p>
-              <div className="mt-3 grid grid-cols-4 gap-2">
-                {brandSwatches.map((color) => (
-                  <span
-                    key={color.token}
-                    title={color.name}
-                    className="h-8 rounded-sm border border-border-subtle"
-                    style={{ backgroundColor: cssVar(color.token) }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="font-mono text-12 text-fg-subtle">
-                {preview.typeLabel}
-              </p>
-              <p
-                className="mt-2 text-fg"
-                style={{
-                  fontSize: cssVar(preview.typeToken),
-                  fontWeight: cssVar(preview.typeWeightToken),
-                }}
-              >
-                {preview.typeSample}
-              </p>
-              <p className="mt-1 font-mono text-12 text-fg-muted">
-                {preview.typeToken}
-              </p>
-            </div>
-
-            <div>
-              <p className="font-mono text-12 text-fg-subtle">
-                {preview.spaceLabel}
-              </p>
-              <div className="mt-4 flex h-8 items-end gap-2">
-                {spaceScale.map((space) => (
-                  <span
-                    key={space.token}
-                    className="h-2 rounded-full bg-primary"
-                    style={{ width: cssVar(space.token) }}
-                  />
-                ))}
-              </div>
-              <p className="mt-1 font-mono text-12 text-fg-muted">
-                {spaceScale.map((space) => space.value).join(' / ')}
-              </p>
-            </div>
-          </div>
-
-          <p className="mt-6 border-t border-border pt-4 font-mono text-12 text-fg-muted">
-            {preview.footerNote}
-          </p>
-        </div>
       </Container>
     </section>
   );

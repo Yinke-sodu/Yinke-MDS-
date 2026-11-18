@@ -100,10 +100,12 @@ export const siteContent: SiteContent = {
     {
       title: '组件',
       items: [
-        { label: '置底按钮', href: '#' },
+        { label: '按钮', href: '/bottom-button', enLabel: 'Button' },
+        { label: '置底按钮', href: '/button-spec', enLabel: 'Bottom Button' },
         { label: '底部浮窗', href: '#' },
+        { label: '标签', href: '/tags', enLabel: 'Tag' },
         { label: '弹窗', href: '/modal', enLabel: 'Modal' },
-        { label: '导航栏', href: '#' },
+        { label: '导航栏', href: '/navbar', enLabel: 'NavBar' },
       ],
     },
     {

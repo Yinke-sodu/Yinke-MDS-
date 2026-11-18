@@ -16,9 +16,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="zh-CN">
       <body className="min-h-screen bg-bg">
         <Header />
-        <div className="flex">
+        <div className="flex h-[calc(100vh-56px)] overflow-hidden">
           <Sidebar />
-          <div className="flex min-w-0 flex-1 flex-col bg-surface">
+          <div className="flex min-w-0 flex-1 flex-col bg-surface overflow-y-auto">
             <main className="flex-1">{children}</main>
             <Footer />
           </div>

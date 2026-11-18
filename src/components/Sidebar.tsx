@@ -106,8 +106,11 @@ export function Sidebar() {
                         }
                       }}
                     >
-                      {item.enLabel ? (
-                        showEn ? `${item.label} ${item.enLabel}` : item.label
+                      {item.enLabel && showEn ? (
+                        <>
+                          <span>{item.label}</span>
+                          <span style={{ color: '#8E8E93' }}>{` ${item.enLabel}`}</span>
+                        </>
                       ) : (
                         item.label
                       )}
