@@ -102,6 +102,9 @@ export const siteContent: SiteContent = {
       items: [
         { label: '按钮', href: '/bottom-button', enLabel: 'Button' },
         { label: '置底按钮', href: '/button-spec', enLabel: 'Bottom Button' },
+        { label: '开关', href: '/switch', enLabel: 'Switch' },
+        { label: '列表', href: '/list', enLabel: 'List' },
+        { label: 'Toast', href: '/toast', enLabel: 'Toast' },
         { label: '底部浮窗', href: '#' },
         { label: '标签', href: '/tags', enLabel: 'Tag' },
         { label: '弹窗', href: '/modal', enLabel: 'Modal' },
