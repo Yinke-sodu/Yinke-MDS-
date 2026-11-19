@@ -25,10 +25,10 @@ export function Sidebar() {
         flexShrink: 0,
         backgroundColor: '#FFFFFF',
         borderRight: '1px solid #E5E5E5',
-        padding: '68px 12px',
+        padding: '16px 12px 68px 12px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '32px',
+        gap: '4px',
         overflowY: 'auto',
       }}
     >
@@ -109,7 +109,7 @@ export function Sidebar() {
                       {item.enLabel && showEn ? (
                         <>
                           <span>{item.label}</span>
-                          <span style={{ color: '#8E8E93' }}>{` ${item.enLabel}`}</span>
+                          <span style={{ color: '#8E8E93', marginLeft: 4 }}>{item.enLabel}</span>
                         </>
                       ) : (
                         item.label
